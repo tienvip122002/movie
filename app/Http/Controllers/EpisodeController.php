@@ -97,4 +97,10 @@ class EpisodeController extends Controller
 
         echo $output;
     }
+
+    public function add_ep($id){
+        $movie = Movie::find($id);
+        $list_episode = Episode::with('movie')->where('movie_id',$id)->orderBy('episode', 'DESC')->get();
+        return view('admin.episode.add_episode', compact('list_episode','movie'));
+    }
 }

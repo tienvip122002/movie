@@ -11,6 +11,7 @@
                   <th scope="col">#</th>
                   <th scope="col">Tên phim</th>
                   <th scope="col">Tên english</th>
+                  <th scope="col">Số tập</th>
                   <th scope="col">Mô tả</th>
                   <th scope="col">Tags</th>
                   <th scope="col">Hình ảnh</th>
@@ -18,13 +19,12 @@
                   <th scope="col">Định dạng</th>
                   <th scope="col">Phụ đề</th>
                   <!-- <th scope="col">Mô tả</th> -->
-                  <th scope="col">Đường dẫn</th>
+                  {{-- <th scope="col">Đường dẫn</th> --}}
                   <th scope="col">Trạng thái</th>
                   <th scope="col">Danh mục</th>
                   <th scope="col">Thể loại</th>
                   <th scope="col">Quốc gia</th>
                   <th scope="col">Thời lượng</th>
-                  <th scope="col">Số tập</th>
                   <th scope="col">Ngày tạo</th>
                   <th scope="col">Ngày cập nhật</th>
                   <th scope="col">Năm</th>
@@ -39,8 +39,10 @@
                   <th scope="row">{{$key}}</th>
                   <td>{{$cate->title}}</td>
                   <td>{{$cate->name_eng}}</td>
-                  <td>{{$cate->description}}</td>
-                  <td>{{$cate->tags}}</td>
+                  {{-- có hàm withCount dung để đếm các trường có nhìu 1-n mà ko truyền đc id dựa vào edopinh model là tên trong '' --}}
+                  <td>{{$cate->episode_count.'/'.$cate->sotap}}<a href="{{ route('add-ep',[$cate->id]) }}" class="btn btn-warning">Thêm tập phim</a></td>
+                  <td><div style="height: 110px; width: 200px;  overflow-y:auto;">{{$cate->description}}</div></td>
+                  <td><div style="height: 110px; width: 200px;  overflow-y:auto;">{{$cate->tags}}</div></td>
                   <td><img width="100" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
                   <td>
                     @if($cate->phimhot==0)
@@ -72,7 +74,7 @@
                    
                   @endif
               </td>
-                  <td>{{$cate->slug}}</td>
+                  {{-- <td>{{$cate->slug}}</td> --}}
                   <td>
                     @if($cate->status)
                         Hiển thị
@@ -92,7 +94,6 @@
 
                   <td>{{$cate->country->title}}</td>
                   <td>{{$cate->movie_time}}</td>
-                  <td>{{$cate->sotap}}</td>
                   <td>{{$cate->ngaytao}}</td>
                   <td>{{$cate->ngaycapnhat}}</td>
                   <td>

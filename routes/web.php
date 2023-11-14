@@ -41,6 +41,8 @@ Route::resource('movie', App\Http\Controllers\MovieController::class);
 Route::resource('episode', App\Http\Controllers\EpisodeController::class);
 //select movie để chọn tập
 Route::get('select-movie', [App\Http\Controllers\EpisodeController::class,'select_movie'])->name('select-movie');
+// add episode
+Route::get('add-ep/{id}', [App\Http\Controllers\EpisodeController::class,'add_ep'])->name('add-ep');
 Route::get('/update-year-phim',[App\Http\Controllers\MovieController::class, 'update_year']);
 Route::get('/update-season-phim',[App\Http\Controllers\MovieController::class, 'update_season']);
 Route::get('/update-thongke',[App\Http\Controllers\MovieController::class, 'update_tt']);
