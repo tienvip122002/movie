@@ -143,10 +143,12 @@ class IndexController extends Controller
         $country = Country::orderBy('id', 'DESC')->get();
         $movie = Movie::with('category','country','genre','movie_genre','episode')->where('status', 1)->where('slug', $slug)->first();
         
+        $movie_lienquan = Movie::where('category_id', $movie->category->id)->orderby(DB::raw('RAND()'))->whereNotIn('slug',[$slug])->get();
+
         $episode = Episode::where('movie_id', $movie->id)->where('episode',$tapphim)->first();
         $phimhot_sidebar = Movie::where('phimhot', 1)->where('status', 1)->orderBy('ngaycapnhat','DESC')->take('15')->get();
         // return response()->json($movie);
-        return view('pages.watch',compact('category', 'genre', 'country', 'movie', 'phimhot_sidebar','episode','tapphim'));
+        return view('pages.watch',compact('category', 'genre', 'country', 'movie', 'phimhot_sidebar','episode','tapphim','movie_lienquan'));
     }
     public function episode()
     {

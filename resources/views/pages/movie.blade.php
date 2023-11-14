@@ -189,8 +189,6 @@
                   </div>
                </div>
                
-               
-               
             </div>
             @endif
        </section>
