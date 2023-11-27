@@ -7,7 +7,7 @@
       <div class="panel-heading">
          <div class="row">
             <div class="col-xs-6">
-               <div class="yoast_breadcrumb hidden-xs"><span><span><a href="">{{ $country_slug ->title }}</a> » <span class="breadcrumb_last" aria-current="page">2020</span></span></span></div>
+               <div class="yoast_breadcrumb hidden-xs"><span><span><a href="">{{ $country_slug ->title }}</a></span></span></div>
             </div>
          </div>
       </div>
@@ -40,6 +40,7 @@
                        FullHD
                     @endif
                   </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                     {{ $value->episode_count }}/{{ $value->sotap }}
                      @if($value->phude==0)
                      Phụ đề
                      @if ($value->season!=0)

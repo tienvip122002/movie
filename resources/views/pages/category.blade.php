@@ -7,7 +7,7 @@
       <div class="panel-heading">
          <div class="row">
             <div class="col-xs-6">
-               <div class="yoast_breadcrumb hidden-xs"><span><span><a href="">{{ $cate_slug ->title }}</a> » <span class="breadcrumb_last" aria-current="page">2020</span></span></span></div>
+               <div class="yoast_breadcrumb hidden-xs"><span><span><a href="">{{ $cate_slug ->title }}</a></span></span></div>
             </div>
          </div>
       </div>
@@ -19,6 +19,49 @@
       <section>
          <div class="section-bar clearfix">
             <h1 class="section-title"><span>{{ $cate_slug ->title }}</span></h1>
+         </div>
+         <div class="section-bar clearfix">
+            <form action="{{ route('loc-phim') }}" method="get">
+               {{-- @csrf --}}
+               <div class="col-md-2">
+               <div class="form-group">
+                  <select class="form-control" name="order"  aria-label=".form-select-sm example">
+                     <option>Xắp xếp</option>
+                     <option value="1">Ngày đăng</option>
+                  </select>
+               </div>
+               
+            </div>
+            <div class="col-md-2">
+               <div class="form-group">
+                  <select class="form-control" name="genre" aria-label=".form-select-sm example">
+                     <option>Thể Loại</option>
+                     @foreach ($genre as $key => $value)
+                     <option value="{{ $value->id }}">{{ $value->title }}</option>
+                     @endforeach
+                  </select>
+               </div>
+               
+            </div>
+            <div class="col-md-2">
+               <div class="form-group">
+                  <select class="form-control" name="country" aria-label=".form-select-sm example">
+                     <option>Quốc Gia</option>
+                        @foreach ($country as $key => $value)
+                        <option value="{{ $value->id }}">{{ $value->title }}</option>
+                        @endforeach
+                  </select>
+               </div>
+               
+            </div>
+            <div class="col-md-2">
+               <div class="form-group">
+                  {!! Form::selectYear('year',1990,2040, null ,['class'=>'form-control','placeholder' => 'Năm']) !!} 
+               </div>
+               
+            </div>
+            <input type="submit" class="btn btn-sm btn-default" value="lọc phim">
+            </form>
          </div>
          <div class="halim_box">
 

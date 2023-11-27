@@ -7,7 +7,7 @@
       <div class="panel-heading">
          <div class="row">
             <div class="col-xs-6">
-               <div class="yoast_breadcrumb hidden-xs"><span><span><a href="">Từ khóa bạn tìm kiếm: {{ $search }}</a> » <span class="breadcrumb_last" aria-current="page">3000</span></span></span></div>
+               <div class="yoast_breadcrumb hidden-xs"><span><span><a href="">Lọc Phim</a></span></span></div>
             </div>
          </div>
       </div>
@@ -18,7 +18,52 @@
    <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
       <section>
          <div class="section-bar clearfix">
-            <h1 class="section-title"><span>Danh sách phim phù hợp với từ khóa của bạn</span></h1>
+            <h1 class="section-title"><span>Lọc Phim</span></h1>
+         </div>
+         <div class="section-bar clearfix">
+            <form action="{{ route('loc-phim') }}" method="get">
+               {{-- @csrf --}}
+               <div class="col-md-2">
+               <div class="form-group">
+                  <select class="form-control" name="order"  aria-label=".form-select-sm example">
+                     <option selected>Xắp xếp</option>
+                     <option value="1">Ngày đăng</option>
+                     <option value="2">Two</option>
+                     <option value="3">Three</option>
+                  </select>
+               </div>
+               
+            </div>
+            <div class="col-md-2">
+               <div class="form-group">
+                  <select class="form-control" name="genre" aria-label=".form-select-sm example">
+                     <option selected>Thể Loại</option>
+                     @foreach ($genre as $key => $value)
+                     <option value="{{ $value->id }}">{{ $value->title }}</option>
+                     @endforeach
+                  </select>
+               </div>
+               
+            </div>
+            <div class="col-md-2">
+               <div class="form-group">
+                  <select class="form-control" name="country" aria-label=".form-select-sm example">
+                     <option selected>Quốc Gia</option>
+                        @foreach ($country as $key => $value)
+                        <option value="{{ $value->id }}">{{ $value->title }}</option>
+                        @endforeach
+                  </select>
+               </div>
+               
+            </div>
+            <div class="col-md-2">
+               <div class="form-group">
+                  {!! Form::selectYear('year',1990,2040, null ,['class'=>'form-control','placeholder' => 'Năm']) !!} 
+               </div>
+               
+            </div>
+            <input type="submit" class="btn btn-sm btn-default" value="lọc phim">
+            </form>
          </div>
          <div class="halim_box">
 
@@ -26,7 +71,7 @@
              <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
                 <div class="halim-item">
                    <a class="halim-thumb" href="{{ route('movie',$value ->slug) }}">
-                      <figure><img class="lazy img-responsive" src="{{ asset('uploads/movie/'.$value ->image) }}" alt="{{ $value->title }}" title="{{ $value->title }}"></figure>
+                      <figure><img class="lazy img-responsive" src="{{ asset('uploads/movie/'.$value ->image) }}" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="{{ $value->title }}"></figure>
                       <span class="status">
                         @if($value->resolution==0)
                         HD
@@ -40,7 +85,6 @@
                        FullHD
                     @endif
                   </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
-                     {{ $value->episode_count }}/{{ $value->sotap }}
                      @if($value->phude==0)
                      Phụ đề
                      @if ($value->season!=0)
@@ -76,7 +120,7 @@
          </div>
          <div class="clearfix"></div>
          <div class="text-center">
-            {!! $movie->links("pagination::bootstrap-4") !!}
+            {{-- {!! $movie->links("pagination::bootstrap-4") !!} --}}
             {{-- <ul class='page-numbers'>
                <li><span aria-current="page" class="page-numbers current">1</span></li>
                <li><a class="page-numbers" href="">2</a></li>

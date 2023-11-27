@@ -25,7 +25,7 @@ class IndexController extends Controller
             $genre = Genre::orderBy('id', 'DESC')->get();
             $country = Country::orderBy('id', 'DESC')->get();
             
-            $movie = Movie::where('title','LIKE','%'. $search.'%' )->orderBy('ngaycapnhat','DESC')->paginate(40);
+            $movie = Movie::withCount('episode')->where('title','LIKE','%'. $search.'%' )->orderBy('ngaycapnhat','DESC')->paginate(40);
             $phimhot_sidebar = Movie::where('phimhot', 1)->where('status', 1)->orderBy('ngaycapnhat','DESC')->take('15')->get();
             return view('pages.search',compact('category', 'genre', 'country','search', 'movie', 'phimhot_sidebar'));
         }
@@ -38,12 +38,12 @@ class IndexController extends Controller
 
     public function home()
     {
-        $phimhot = Movie::where('phimhot', 1)->where('status', 1)->orderBy('ngaycapnhat','DESC')->get();
+        $phimhot = Movie::withCount('episode')->where('phimhot', 1)->where('status', 1)->orderBy('ngaycapnhat','DESC')->get();
         $phimhot_sidebar = Movie::where('phimhot', 1)->where('status', 1)->orderBy('ngaycapnhat','DESC')->take('15')->get();
         $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
         $genre = Genre::orderBy('id', 'DESC')->get();
         $country = Country::orderBy('id', 'DESC')->get();
-        $category_home = Category::with('movie')->orderBy('id', 'DESC')->where('status', 1)->get();
+        $category_home = Category::with(['movie'=> function($q) {$q->withCount('episode');}])->orderBy('id', 'DESC')->where('status', 1)->get();
         return view('pages.home',compact('category', 'genre', 'country', 'category_home', 'phimhot', 'phimhot_sidebar'));
     }
 
@@ -93,7 +93,7 @@ class IndexController extends Controller
             $many_genre[] = $value ->movie_id;
         }
 
-        $movie = Movie::whereIn('id', $many_genre)->orderBy('ngaycapnhat','DESC')->paginate(40);
+        $movie = Movie::withCount('episode')->whereIn('id', $many_genre)->orderBy('ngaycapnhat','DESC')->paginate(40);
 
         return view('pages.genre',compact('category', 'genre', 'country','genre_slug', 'movie', 'phimhot_sidebar'));
     }
@@ -103,7 +103,7 @@ class IndexController extends Controller
         $genre = Genre::orderBy('id', 'DESC')->get();
         $country = Country::orderBy('id', 'DESC')->get();
         $country_slug = Country::where('slug', $slug)->first();
-        $movie = Movie::where('country_id', $country_slug->id)->orderBy('ngaycapnhat','DESC')->paginate(40);
+        $movie = Movie::withCount('episode')->where('country_id', $country_slug->id)->orderBy('ngaycapnhat','DESC')->paginate(40);
         $phimhot_sidebar = Movie::where('phimhot', 1)->where('status', 1)->orderBy('ngaycapnhat','DESC')->take('15')->get();
         return view('pages.country',compact('category', 'genre', 'country','country_slug', 'movie', 'phimhot_sidebar'));
     }
@@ -155,5 +155,38 @@ class IndexController extends Controller
         return view('pages.episode');
     }
 
+
+    public function loc()
+    {
+        $sapxep = $_GET['order'];
+        $genre_get = $_GET['genre'];
+        $country_get = $_GET['country'];
+        $year_get = $_GET['year'];
+        if ($sapxep == '' && $genre_get=='' && $country_get=='' && $year_get=='')
+        {
+        return redirect()->back();  
+        }else{
+            $category = Category::orderBy('id', 'DESC')->where('status', 1)->get();
+            $genre = Genre::orderBy('id', 'DESC')->get();
+            $country = Country::orderBy('id', 'DESC')->get();
+
+            $phimhot_sidebar = Movie::where('phimhot', 1)->where('status', 1)->orderBy('ngaycapnhat','DESC')->take('15')->get();
+            // $movie = Movie::with('country','genre','movie_genre')->withCount('episode');
+            // if($genre_get){
+            //     $movie = $movie->where('genre_id','=',$genre_get);
+            // }elseif($country_get){
+            //     $movie = $movie->where('country_id','=',$country_get );
+            // }elseif($year_get){
+            //     $movie = $movie->where('year','=',$year_get );
+            // }else{
+            //     $movie = $movie ->orderBy('ngaycapnhat','DESC')->paginate(40);
+
+            // }
+            // $movie = $movie ->orderBy('ngaycapnhat','DESC')->paginate(40);
+            $movie = Movie::withCount('episode')->orwhere('genre_id',$genre_get)->orwhere('country_id',$country_get )->orwhere('year',$year_get )->orderBy('ngaycapnhat','DESC')->paginate(40);
+            return view('pages.locphim',compact('category', 'genre', 'country', 'movie', 'phimhot_sidebar'));
+        }
+        
+    }
   
 }

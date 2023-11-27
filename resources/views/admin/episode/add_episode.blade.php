@@ -25,7 +25,9 @@
                         
                             <div class="form-group">
                                 {!! Form::label('movie_id', 'Phim',[]) !!}
-                                {!! Form::text('movie_id', isset($movie) ? $movie->title : '', ['class' => 'form-control', 'placeholder' => '','readonly']) !!}
+                                {!! Form::hidden('movie_id',isset($movie) ? $movie->id : '', ['class' => 'form-control', 'placeholder' => '','readonly']) !!}
+                                {!! Form::text("phim", $movie->title , ['class' => 'form-control', 'placeholder' => '','readonly']) !!}
+                               
                             </div>
                             <div class="form-group">
                                 {!! Form::label('link phim', 'link phim',[]) !!}

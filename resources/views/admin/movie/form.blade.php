@@ -76,11 +76,11 @@
                             </div>
                         <div class="form-group">
                             {!! Form::label('Category', 'Category',[]) !!}
-                            {!! Form::select('category_id', $category , isset($movie) ? $movie->category : '', ['class' => 'form-control']) !!}
+                            {!! Form::select('category_id', $category , isset($movie) ? $movie->category_id : '', ['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('Country', 'Country',[]) !!}
-                            {!! Form::select('country_id', $country, isset($movie) ? $movie->country : '', ['class' => 'form-control']) !!}
+                            {!! Form::select('country_id', $country, isset($movie) ? $movie->country_id : '', ['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('Genre', 'thể loại',[]) !!}</br>

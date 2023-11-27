@@ -33,14 +33,23 @@ class EpisodeController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $ep = new Episode();
-        $ep->movie_id = $data['movie_id'];
-        $ep->link_movie = $data['link_movie'];
-        $ep->episode = $data['episode'];
-        $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
-        $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
-        $ep->save();
-        return redirect()->back();
+        $ep_check = Episode::where('Episode', $data['episode'])->where('movie_id',$data['movie_id'])->count();
+        if ($ep_check){
+            $output ='<script type="text/javascript">
+            alert("Tập phim này đã có rồi, bạn hãy thêm các tập tiếp theo")
+            </script>';
+            return $output;
+        }
+        else{
+            $ep = new Episode();
+            $ep->movie_id = $data['movie_id'];
+            $ep->link_movie = $data['link_movie'];
+            $ep->episode = $data['episode'];
+            $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+            $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+            $ep->save();
+            return redirect()->back();
+        }
     }
 
     /**

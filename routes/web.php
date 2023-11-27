@@ -24,6 +24,7 @@ Route::get('/so-tap',[App\Http\Controllers\IndexController::class, 'episode'])->
 Route::get('/year/{year}',[App\Http\Controllers\IndexController::class, 'year']);
 Route::get('/tag/{tag}',[App\Http\Controllers\IndexController::class, 'tag']);
 Route::get('/tim-kiem',[App\Http\Controllers\IndexController::class, 'search'])->name('tim-kiem');
+Route::get('/loc-phim',[App\Http\Controllers\IndexController::class, 'loc'])->name('loc-phim');
 
 
 

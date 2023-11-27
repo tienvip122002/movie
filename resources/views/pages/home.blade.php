@@ -63,6 +63,7 @@
                     FullHD
                  @endif
                      </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                        {{ $value->episode_count }}/{{ $value->sotap }}
                         @if($value->phude==0)
                         Phụ đề
                         @if ($value->season!=0)
@@ -131,6 +132,9 @@
                        FullHD
                     @endif
                   </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                     
+                        {{ $value->episode_count }}/{{ $value->sotap }}
+                         
                      @if($value->phude==0)
                      Phụ đề
                      @if ($value->season!=0)
