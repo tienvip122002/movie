@@ -4,7 +4,7 @@
 B1:**git clone về**
 
 ```bash
-[ .\venv\Scripts\activate](https://github.com/tienvip122002/movie.git)
+(https://github.com/tienvip122002/movie.git)
 ```
 
 
@@ -52,6 +52,6 @@ sau đó chạy serve và xem giúp em ạ em cảm ơn anh/chị!
 php artisan serve
 ```
 
-***hướng dẫn***
+***hướng dẫn***</br>
 vô đường dẫn /home để vào admin có thể thay đổi trong user để vào
 
