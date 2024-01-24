@@ -8,7 +8,7 @@ B1:**git clone về**
 ```
 
 
-B2:**Tải database movie.sql trong thư mục về và mở mysql của xampp**
+B2:**Tải database movie.sql trong thư mục về và mở mysql của xampp**</br>
 
 Truy cập link 
 ```bash
@@ -16,13 +16,13 @@ http://localhost/phpmyadmin
 ```
 B3:chọn nhập và chọn file movie.sql để nhập
 
-**Mở thư mục movie mới clone **
+**Mở thư mục movie mới clone**</br>
 chuyển file '.env.example' thành '.env'
 
 vào file vừa đổ tên '.evn' thay đổi DB_DATABASE=movie
 
 
-B4**chuột trái vào thư mục movie vừa clone chọn git bash here hoặc open in terminal**
+B4**chuột trái vào thư mục movie vừa clone chọn git bash here hoặc open in terminal**</br>
 
 nhập các dòng lệnh sau
 ```bash
