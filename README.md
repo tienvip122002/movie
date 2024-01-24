@@ -53,5 +53,5 @@ php artisan serve
 ```
 
 ***hướng dẫn***</br>
-vô đường dẫn /home để vào admin có thể thay đổi trong user để vào
+vô đường dẫn /home để vào admin và đăng kí tài khoản rồi login vào admin
 
